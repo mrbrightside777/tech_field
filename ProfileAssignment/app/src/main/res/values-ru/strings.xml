@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Назначение профиля</string>
+
+    <string name="name_text">имя</string>
+    <string name="name_val">халсиён рамирез</string>
+
+    <string name="dob_text">день рождения</string>
+    <string name="dob_val">09/06/1993</string>
+
+    <string name="education_text">образование</string>
+    <string name="education_val">Университет имени святого имени</string>
+
+    <string name="experience_text">Опыт</string>
+    <string name="experience_val">немного python и devops</string>
+
+    <string name="hobbies_text">Увлечения</string>
+    <string name="hobbies_val">
+        Джиу Джитсу
+        плавание
+    </string>
+</resources>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ProfileAssignment</string>
+
+    <string name="name_text">Name</string>
+    <string name="name_val">Halcyon Ramirez</string>
+
+    <string name="dob_text">Dob</string>
+    <string name="dob_val">09/06/1993</string>
+
+    <string name="education_text">Education</string>
+    <string name="education_val">Holy Name University</string>
+
+    <string name="experience_text"> Experience</string>
+    <string name="experience_val">a little bit of python and devops</string>
+
+    <string name="hobbies_text">Hobbies</string>
+    <string name="hobbies_val">
+        Jiujitsu
+        Swimming
+    </string>
+
+</resources>
