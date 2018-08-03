@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.security.Permission;
+
 public class MainActivity extends AppCompatActivity {
 
     private Activity ctx;
@@ -159,10 +161,13 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case 0:
-                call_number(number.getText().toString());
+                if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    call_number(number.getText().toString());
                 break;
             case 1:
-                choose_picture();
+                if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    choose_picture();
+                break;
         }
     }
 
