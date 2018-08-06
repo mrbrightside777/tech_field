@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Calculator"
+        android:id="@+id/calculator"
+        android:icon="@mipmap/ic_launcher_round"/>
+
+    <item
+        android:title="Camera"
+        android:id="@+id/camera"
+        android:icon="@mipmap/ic_launcher_round"></item>
+</menu>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:clickable="false"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="0dp">
+        <EditText
+            android:theme="@style/CustomTheme"
+            android:textCursorDrawable="@null"
+            android:background="@android:color/transparent"
+            android:layout_weight="3"
+            android:textSize="30sp"
+            android:id="@+id/expression_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            />
+
+
+
+        <TextView
+            android:clickable="false"
+            android:id="@+id/expression_answer"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nnjnjn"
+            android:layout_gravity="right"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/calc_grid"
+        android:layout_weight="3"
+        android:numColumns="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </GridView>
+
+
+
+    <!--<GridLayout-->
+        <!--xmlns:grid="http://schemas.android.com/apk/res-auto"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_weight="3"-->
+        <!--android:columnCount="4"-->
+        <!--android:rowCount="4"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:alignmentMode="alignBounds"-->
+        <!--android:id="@+id/calc_grid"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp">-->
+
+        <!--"clear", "c", "%", "/",-->
+        <!--"7", "8", "9", "x",-->
+        <!--"4", "5", "6", "-",-->
+        <!--"1", "2", "3", "+",-->
+        <!--"(", ")", "0", "="-->
+        <!--<Button android:id="@+id/btn_clear"  android:text="Clear" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_c"  android:text="c" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_mod"  android:text="%" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_div"  android:text="/" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_7"  android:text="7" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_8"  android:text="8" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_9"  android:text="9" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_mul"  android:text="x" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_4"  android:text="4" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_5"  android:text="5" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_6"  android:text="6" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_sub"  android:text="-" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_open_parens"  android:text="(" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_close_parens"  android:text=")" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_zero"  android:text="0" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+        <!--<Button android:id="@+id/btn_eval"  android:text="=" android:layout_gravity="fill" app:layout_columnWeight="1" />-->
+    <!--</GridLayout>-->
+
+
+</LinearLayout>
