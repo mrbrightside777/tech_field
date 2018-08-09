@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ZooAssignment</string>
+    <string-array name="zoo_categories">
+        <item>Mammals</item>
+        <item>Birds</item>
+        <item>Amphibians</item>
+        <item>Reptiles</item>
+    </string-array>
+    <string name="default_image"></string>
+</resources>
