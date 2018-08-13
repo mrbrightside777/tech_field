@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Weekend2Assignment</string>
+    <string-array name="options">
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>Orange</item>
+        <item>Violet</item>
+    </string-array>
+</resources>
