@@ -16,15 +16,12 @@ import com.example.halcyonjuly7.weatherappassignment.data.models.pojo.WeatherLis
 import com.example.halcyonjuly7.weatherappassignment.database.Entities.WeatherMapData;
 import com.example.halcyonjuly7.weatherappassignment.database.WeatherDb;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
+
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
@@ -63,57 +60,48 @@ public class MainActivity extends AppCompatActivity {
             String zip_code = zipcode_entry.getText().toString().trim();
             weatherLists.clear();
             if (!zip_code.isEmpty()) {
-                io.reactivex.Observable.just(db)
+                db.weatheMapDao().getWeatherFromZip(zipcode_entry.getText().toString())
                         .subscribeOn(Schedulers.io())
-                        .map(db -> {
-                            WeatherMapData weatherMapData = db.weatheMapDao().getWeatherFromZip(zipcode_entry.getText().toString());
-                            if (weatherMapData == null)
-                                return io.reactivex.Observable.empty();
-                            return weatherMapData;
-                        }).subscribe(weatherMapData -> {
-                            if (weatherMapData instanceof ObservableEmpty) {
-                                RetroFitHelper retroFitHelper = RetroFitHelper.getINSTANCE();
-                                OpenWeatherMap openWeatherMap = retroFitHelper.getOpenWeatherMap();
-                                openWeatherMap.getForeCast(zip_code, getResources().getString(R.string.api_key), "metric")
-                                        .subscribeOn(Schedulers.io())
-                                        .subscribe(new SingleObserver<WeatherDataPojo>() {
-                                            @Override
-                                            public void onSubscribe(Disposable d) {
+                        .observeOn(Schedulers.io())
+                        .flatMap(weatherMapData -> {
+                            if (weatherMapData == null) {
+                                return RetroFitHelper.getINSTANCE().getOpenWeatherMap()
+                                        .getForeCast(zip_code, getResources().getString(R.string.api_key), "metric");
+                            }
+                            return Single.just(weatherMapData);
+                        })
+                        .map(o -> {
+                            if (o instanceof WeatherDataPojo) {
+                                Gson gson = new Gson();
+                                WeatherMapData weatherMapData1 = new WeatherMapData();
+                                weatherMapData1.setResponse(gson.toJson(o));
+                                weatherMapData1.setTimestamp(System.currentTimeMillis() / 1000);
+                                weatherMapData1.setZip_code(zip_code);
+                                db.weatheMapDao().insertResp(weatherMapData1);
+                                return o;
+                            }
 
-                                            }
+                            WeatherDataPojo weatherDataPojo = new Gson().fromJson(((WeatherMapData)o).getResponse(), WeatherDataPojo.class);
+                            return weatherDataPojo;
 
-                                            @Override
-                                            public void onSuccess(WeatherDataPojo weatherDataPojo) {
-                                                Gson gson = new Gson();
-                                                WeatherMapData weatherMapData1 = new WeatherMapData();
-                                                weatherMapData1.setResponse(gson.toJson(weatherDataPojo));
-                                                weatherMapData1.setTimestamp(System.currentTimeMillis() / 1000);
-                                                weatherMapData1.setZip_code(zip_code);
-                                                db.weatheMapDao().insertResp(weatherMapData1);
-                                                weatherLists.addAll(weatherDataPojo.getList());
-                                                runOnUiThread(() -> {
-                                                    weatherDataAdapter.notifyDataSetChanged();
-                                                    city_name.setText(weatherDataPojo.getCity().getName());
-                                                });
-                                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SingleObserver<Object>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
 
-                                            @Override
-                                            public void onError(Throwable e) {
+                            }
 
-                                                runOnUiThread(() -> {
-                                                    weatherDataAdapter.notifyDataSetChanged();
-                                                    Toast.makeText(MainActivity.this, "No results", Toast.LENGTH_SHORT).show();
-                                                });
-                                            }
-                                        });
+                            @Override
+                            public void onSuccess(Object o) {
+                                WeatherDataPojo weatherDataPojo = ((WeatherDataPojo)o);
+                                weatherLists.addAll(weatherDataPojo.getList());
+                                weatherDataAdapter.notifyDataSetChanged();
+                                city_name.setText(weatherDataPojo.getCity().getName());
+                            }
 
-                            } else {
-                                WeatherDataPojo weatherDataPojo = new Gson().fromJson(((WeatherMapData)weatherMapData).getResponse(), WeatherDataPojo.class);
-                                runOnUiThread(() -> {
-                                    city_name.setText(weatherDataPojo.getCity().getName());
-                                    weatherLists.addAll(weatherDataPojo.getList());
-                                    weatherDataAdapter.notifyDataSetChanged();
-                                });
+                            @Override
+                            public void onError(Throwable e) {
 
                             }
                         });
