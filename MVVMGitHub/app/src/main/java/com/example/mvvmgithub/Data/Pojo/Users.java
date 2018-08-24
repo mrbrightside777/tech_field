@@ -1,10 +1,10 @@
 
-package com.example.mvpgithub.Pojo;
+package com.example.mvvmgithub.Data.Pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Owner {
+public class Users {
 
     @SerializedName("login")
     @Expose
@@ -30,15 +30,6 @@ public class Owner {
     @SerializedName("followers_url")
     @Expose
     private String followersUrl;
-    @SerializedName("following_url")
-    @Expose
-    private String followingUrl;
-    @SerializedName("gists_url")
-    @Expose
-    private String gistsUrl;
-    @SerializedName("starred_url")
-    @Expose
-    private String starredUrl;
     @SerializedName("subscriptions_url")
     @Expose
     private String subscriptionsUrl;
@@ -48,18 +39,15 @@ public class Owner {
     @SerializedName("repos_url")
     @Expose
     private String reposUrl;
-    @SerializedName("events_url")
-    @Expose
-    private String eventsUrl;
     @SerializedName("received_events_url")
     @Expose
     private String receivedEventsUrl;
     @SerializedName("type")
     @Expose
     private String type;
-    @SerializedName("site_admin")
+    @SerializedName("score")
     @Expose
-    private Boolean siteAdmin;
+    private Double score;
 
     public String getLogin() {
         return login;
@@ -125,30 +113,6 @@ public class Owner {
         this.followersUrl = followersUrl;
     }
 
-    public String getFollowingUrl() {
-        return followingUrl;
-    }
-
-    public void setFollowingUrl(String followingUrl) {
-        this.followingUrl = followingUrl;
-    }
-
-    public String getGistsUrl() {
-        return gistsUrl;
-    }
-
-    public void setGistsUrl(String gistsUrl) {
-        this.gistsUrl = gistsUrl;
-    }
-
-    public String getStarredUrl() {
-        return starredUrl;
-    }
-
-    public void setStarredUrl(String starredUrl) {
-        this.starredUrl = starredUrl;
-    }
-
     public String getSubscriptionsUrl() {
         return subscriptionsUrl;
     }
@@ -173,14 +137,6 @@ public class Owner {
         this.reposUrl = reposUrl;
     }
 
-    public String getEventsUrl() {
-        return eventsUrl;
-    }
-
-    public void setEventsUrl(String eventsUrl) {
-        this.eventsUrl = eventsUrl;
-    }
-
     public String getReceivedEventsUrl() {
         return receivedEventsUrl;
     }
@@ -197,12 +153,12 @@ public class Owner {
         this.type = type;
     }
 
-    public Boolean getSiteAdmin() {
-        return siteAdmin;
+    public Double getScore() {
+        return score;
     }
 
-    public void setSiteAdmin(Boolean siteAdmin) {
-        this.siteAdmin = siteAdmin;
+    public void setScore(Double score) {
+        this.score = score;
     }
 
 }

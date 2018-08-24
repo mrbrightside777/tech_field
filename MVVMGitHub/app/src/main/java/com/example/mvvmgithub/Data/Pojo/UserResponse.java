@@ -1,9 +1,10 @@
 
-package com.example.mvpgithub.Pojo;
+package com.example.mvvmgithub.Data.Pojo;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class UserResponse {
 

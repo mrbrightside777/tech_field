@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MVVMGitHub</string>
+    <string name="github_username_hint">Github Username</string>
+</resources>

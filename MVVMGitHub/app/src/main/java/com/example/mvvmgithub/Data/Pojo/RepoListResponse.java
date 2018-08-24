@@ -1,5 +1,5 @@
 
-package com.example.mvpgithub.Pojo;
+package com.example.mvvmgithub.Data.Pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
