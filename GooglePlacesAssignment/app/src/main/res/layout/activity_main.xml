@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+
+    <data class="MainActivityBinding">
+
+        <import type="com.example.googleplacesassignment.Misc.Constants"/>
+
+        <variable
+            name="autoCompleteObserverFields"
+            type="com.example.googleplacesassignment.AutoCompleteObservableFields"/>
+
+        <variable
+            name="locationObservableFields"
+            type="com.example.googleplacesassignment.LocationObservableFields"/>
+        <variable
+            name="placeSearchLiveData"
+            type="com.example.googleplacesassignment.PlaceSearchLiveData"/>
+        <variable
+            name="placeSearchViewModel"
+            type="com.example.googleplacesassignment.PlacesSearchViewModel"/>
+        
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Views.MainActivity">
+        <fragment
+            android:layout_weight="3"
+            android:id="@+id/map_frag"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="2" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_weight="4"
+            android:id="@+id/places_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintHorizontal_bias="0.54"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/map_frag"
+            app:layout_constraintVertical_weight="3"></androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".5" />
+
+        <AutoCompleteTextView
+            android:layout_weight="1"
+            android:id="@+id/place_query"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:hint="Search"
+            android:text="@={autoCompleteObserverFields.current_query}"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/places_recycler" />
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_weight="1">
+
+            <Spinner
+                android:onItemSelected="@{(parent,view,pos,id) -> autoCompleteObserverFields.categorySelected(parent,view,pos,id)}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:entries="@array/place_categories" />
+
+
+            <Button
+                android:id="@+id/search_place_btn"
+                android:onClick="@{() -> placeSearchViewModel.get_query(autoCompleteObserverFields.current_query, locationObservableFields.locationField,  Constants.WEB.LOCATION_SEARCH_RADIUS, Constants.WEB.GOOGLE_API_KEY)}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GooglePlacesAssignment</string>
+    <string-array name="place_categories">
+        <item>address</item>
+        <item>establishment</item>
+        <item>cities</item>
+    </string-array>
+</resources>
