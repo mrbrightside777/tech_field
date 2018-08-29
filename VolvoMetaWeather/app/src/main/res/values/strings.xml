@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">VolvoMetaWeather</string>
+    <string-array name="place_choices">
+        <item>Gothenburg</item>
+        <item>Stockholm</item>
+        <item>Mountain View</item>
+        <item>London</item>
+        <item>New York</item>
+        <item>Berlin</item>
+    </string-array>
+</resources>
