@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.cardview.widget.CardView
+    android:layout_margin="20dp"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:text="some number"
+        android:gravity="center"
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</androidx.cardview.widget.CardView>
+
+</layout>
