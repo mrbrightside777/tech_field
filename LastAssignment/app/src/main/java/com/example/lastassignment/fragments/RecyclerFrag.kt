@@ -12,12 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lastassignment.R
 import com.example.lastassignment.adapters.NumbersRecyclerAdapter
 import com.example.lastassignment.databinding.RecyclerFragBinding
+import com.example.lastassignment.di.components.DaggerNumbersViewModelComponent
+import com.example.lastassignment.di.modules.NumbersViewModelModule
 import com.example.lastassignment.view_model.NumbersViewModel
+import javax.inject.Inject
 
 
 class RecyclerFrag: Fragment() {
-    lateinit var bindings: RecyclerFragBinding
+
+    @Inject
     lateinit var view_model: NumbersViewModel
+    lateinit var bindings: RecyclerFragBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bindings = DataBindingUtil.inflate(inflater, R.layout.recycler_frag, container, false)
@@ -26,7 +31,11 @@ class RecyclerFrag: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        view_model = ViewModelProviders.of(activity!!).get(NumbersViewModel::class.java)
+        DaggerNumbersViewModelComponent.builder()
+                .numbersViewModelModule(NumbersViewModelModule(activity!!))
+                .build()
+                .inject(this)
+//        view_model = ViewModelProviders.of(activity!!).get(NumbersViewModel::class.java)
         bindings.numberRecycler.adapter = NumbersRecyclerAdapter(view_model.numbers, view_model.last_num)
         bindings.numberRecycler.layoutManager = LinearLayoutManager(activity)
         view_model.observe_numbers(this, Observer {

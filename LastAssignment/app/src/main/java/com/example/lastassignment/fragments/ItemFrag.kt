@@ -11,12 +11,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.lastassignment.R
 import com.example.lastassignment.databinding.ItemsFragBinding
+import com.example.lastassignment.di.components.DaggerNumbersViewModelComponent
+import com.example.lastassignment.di.modules.NumbersViewModelModule
 import com.example.lastassignment.view_model.NumbersViewModel
+import javax.inject.Inject
 
 
 class ItemFrag: Fragment() {
 
     lateinit var bindings: ItemsFragBinding
+    @Inject
     lateinit var view_model: NumbersViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,7 +30,11 @@ class ItemFrag: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        view_model = ViewModelProviders.of(activity!!).get(NumbersViewModel::class.java)
+        DaggerNumbersViewModelComponent.builder()
+                .numbersViewModelModule(NumbersViewModelModule(activity!!))
+                .build()
+                .inject(this)
+//        view_model = ViewModelProviders.of(activity!!).get(NumbersViewModel::class.java)
         view_model.observe_lastnum(this, Observer {
             bindings.currentVal.text = it.toString()
         })

@@ -1,15 +1,19 @@
 package com.example.lastassignment.di.modules
 
-import com.example.lastassignment.network.endpoints.NumberEndpoints
+import android.app.Activity
+import android.content.Context
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProviders
+import com.example.lastassignment.view_model.NumbersViewModel
 import dagger.Module
 import dagger.Provides
-import retrofit2.Retrofit
 
+@Module
+class NumbersViewModelModule(val activity: FragmentActivity) {
 
-@Module(includes = [RetrofitModule::class])
-class NumbersViewModelModule {
     @Provides
-    fun get_endpoints(retrofit: Retrofit):NumberEndpoints {
-        return retrofit.create(NumberEndpoints::class.java)
+    fun get_viewmodel():NumbersViewModel {
+        return ViewModelProviders.of(activity).get(NumbersViewModel::class.java)
     }
 }
